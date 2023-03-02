@@ -11,9 +11,9 @@ key = conf['keys']['api_key']
 
 main_cur = 'ETH'  # currency code (ISO 4217) of which you want to know the value
 sec_cur = 'USDT'  # currency code (ISO 4217) for calculating the main
-while_time = 60  # After these seconds, a message will be displayed in the console if the price changes by more than 1%
-rate_freq = 20  # Frequency of requesting a new rate (seconds)
-percent = 0.7  # Percentage, when changing the rate by this percentage, a message will be displayed in the console
+while_time = 3600  # After these seconds, a message will be displayed in the console if the price changes by more than 1%
+rate_freq = 10  # Frequency of requesting a new rate (seconds)
+percent = 1  # Percentage, when changing the rate by this percentage, a message will be displayed in the console
 
 url = f'https://rest.coinapi.io/v1/exchangerate/{main_cur}/{sec_cur}'
 headers = {

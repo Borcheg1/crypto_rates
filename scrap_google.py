@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from art import tprint
 
 
-main_cur = 'BTC'  # currency code (ISO 4217) of which you want to know the value
+main_cur = 'ETH'  # currency code (ISO 4217) of which you want to know the value
 sec_cur = 'USDT'  # currency code (ISO 4217) for calculating the main
 while_time = 3600  # After these seconds, a message will be displayed in the console if the price changes by more than 1%
 rate_freq = 20  # Frequency of requesting a new rate (seconds)
