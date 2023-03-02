@@ -1,0 +1,14 @@
+# PyCharm files
+.idea
+
+# virtual environment files
+/venv
+
+# secret keys
+config.ini
+
+# test files
+testing.py
+
+# log files
+geckodriver.log
