@@ -6,11 +6,11 @@ from bs4 import BeautifulSoup
 from art import tprint
 
 
-main_cur = 'ETH'  # currency code (ISO 4217) of which you want to know the value
+main_cur = 'BTC'  # currency code (ISO 4217) of which you want to know the value
 sec_cur = 'USDT'  # currency code (ISO 4217) for calculating the main
-while_time = 20  # After these seconds, a message will be displayed in the console if the price changes by more than 1%
-rate_freq = 5  # Frequency of requesting a new rate (seconds)
-percent = 0.01  # Percentage, when changing the rate by this percentage, a message will be displayed in the console
+while_time = 3600  # After these seconds, a message will be displayed in the console if the price changes by more than 1%
+rate_freq = 20  # Frequency of requesting a new rate (seconds)
+percent = 1  # Percentage, when changing the rate by this percentage, a message will be displayed in the console
 URL = f'https://www.google.com/search?q={main_cur}+{sec_cur}'
 flag = False
 max_change = None
@@ -34,11 +34,11 @@ def get_cur_value(url=URL):
 if __name__ == '__main__':
     tprint('Hello!', 'starwars')
     time.sleep(1.5)
-    print(f"I'll tell you if the value of ETH / USDT changes by {percent}% or more within an {round(while_time / 60, 1)} minutes\n")
+    print(f"I'll tell you if the value of {main_cur} / {sec_cur} changes by {percent}% or more within an {round(while_time / 60, 1)} minutes\n")
     start_value = get_cur_value()
     time.sleep(1.5)
     date = time.strftime('%d/%m/%Y %H:%M:%S', time.localtime())
-    print(f"Now {date} the value of 1 ETH is {start_value} USDT\n")
+    print(f"Now {date} the value of 1 {main_cur} is {start_value} {sec_cur}\n")
 
     while True:
         cur_time = time.time()
@@ -69,4 +69,4 @@ if __name__ == '__main__':
             if flag:
                 tprint('Attention!', 'starwars')
                 print(f'Maximum price changed at {change_time} by {max_change}%, the cost was {save_cur_value}\n')
-                print(f"Now {date} the value of 1 ETH is {cur_value} USDT\n")
+                print(f"Now {date} the value of 1 {main_cur} is {cur_value} {sec_cur}\n")

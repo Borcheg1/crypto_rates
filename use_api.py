@@ -47,11 +47,11 @@ def get_cur_value(url=url):
 if __name__ == '__main__':
     tprint('Hello!', 'starwars')
     time.sleep(1.5)
-    print(f"I'll tell you if the value of ETH / USDT changes by {percent}% or more within an {round(while_time / 60, 1)} minutes\n")
+    print(f"I'll tell you if the value of {main_cur} / {sec_cur} changes by {percent}% or more within an {round(while_time / 60, 1)} minutes\n")
     start_value = get_cur_value()
     time.sleep(1.5)
     date = time.strftime('%d/%m/%Y %H:%M:%S', time.localtime())
-    print(f"Now {date} the value of 1 ETH is {start_value} USDT\n")
+    print(f"Now {date} the value of 1 {main_cur} is {start_value} {sec_cur}\n")
 
     while True:
         cur_time = time.time()
@@ -82,4 +82,4 @@ if __name__ == '__main__':
             if flag:
                 tprint('Attention!', 'starwars')
                 print(f'Maximum price change was at {change_time} by {max_change}%, the cost was {save_cur_value}\n')
-                print(f"Now {date} the value of 1 ETH is {cur_value} USDT\n")
+                print(f"Now {date} the value of 1 {main_cur} is {cur_value} {sec_cur}\n")
