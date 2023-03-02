@@ -6,7 +6,12 @@ from bs4 import BeautifulSoup
 from art import tprint
 
 
-URL = 'https://www.google.com/search?q=eth+usdt'
+main_cur = 'ETH'  # currency code (ISO 4217) of which you want to know the value
+sec_cur = 'USDT'  # currency code (ISO 4217) for calculating the main
+while_time = 20  # After these seconds, a message will be displayed in the console if the price changes by more than 1%
+rate_freq = 5  # Frequency of requesting a new rate (seconds)
+percent = 0.01  # Percentage, when changing the rate by this percentage, a message will be displayed in the console
+URL = f'https://www.google.com/search?q={main_cur}+{sec_cur}'
 flag = False
 max_change = None
 
@@ -29,11 +34,11 @@ def get_cur_value(url=URL):
 if __name__ == '__main__':
     tprint('Hello!', 'starwars')
     time.sleep(1.5)
-    print("I'll tell you if the value of ETH / USDT changes by 1% or more\n")
+    print(f"I'll tell you if the value of ETH / USDT changes by {percent}% or more within an {round(while_time / 60, 1)} minutes\n")
     start_value = get_cur_value()
     time.sleep(1.5)
     date = time.strftime('%d/%m/%Y %H:%M:%S', time.localtime())
-    print(f"Now {date} the value of 1 ETH is {start_value} USDT")
+    print(f"Now {date} the value of 1 ETH is {start_value} USDT\n")
 
     while True:
         cur_time = time.time()
@@ -43,12 +48,12 @@ if __name__ == '__main__':
             max_change = None
             flag = False
 
-        while cur_time - start_time < 3600:  # 3600
-            time.sleep(60)  # 60
+        while cur_time - start_time < while_time:
+            time.sleep(rate_freq)
             cur_value = get_cur_value()
             time.sleep(5)
             change_value = round((abs(start_value - cur_value) * 100) / start_value, 2)
-            if change_value > round(start_value / 100, 2):
+            if change_value > round(start_value * (percent / 100), 2):
                 flag = True
                 if not max_change:
                     max_change = change_value
@@ -63,5 +68,5 @@ if __name__ == '__main__':
         else:
             if flag:
                 tprint('Attention!', 'starwars')
-                print(f'Maximum price change was at {change_time} by {max_change}%, the cost was {save_cur_value}')
-                print(f"Now {date} the value of 1 ETH is {cur_value} USDT")
+                print(f'Maximum price changed at {change_time} by {max_change}%, the cost was {save_cur_value}\n')
+                print(f"Now {date} the value of 1 ETH is {cur_value} USDT\n")
